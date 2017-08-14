@@ -22,15 +22,15 @@ namespace ecommerce.Controllers
         [Route("")]
         public IActionResult Index()
         {
-            List<Order> orders = _context.Orders
+            List<Order> orders = _context.orders
                                     .Include(order => order.User)
                                     .Include(ord => ord.Product)
                                     .OrderByDescending(o => o.CreatedAt)
                                     .ToList();
             ViewBag.orders = orders.Take(3);
-            List<Product> products = _context.Product.OrderByDescending(p => p.CreatedAt).ToList();
+            List<Product> products = _context.product.OrderByDescending(p => p.CreatedAt).ToList();
             ViewBag.products = products.Take(4);
-            List<User> customers = _context.User.OrderByDescending(u => u.CreatedAt).ToList();
+            List<User> customers = _context.user.OrderByDescending(u => u.CreatedAt).ToList();
             ViewBag.customers = customers.Take(3);
             return View();
         }
@@ -38,21 +38,21 @@ namespace ecommerce.Controllers
         [Route("Products")]
         public IActionResult Products()
         {
-            ViewBag.products = _context.Product.ToList();
+            ViewBag.products = _context.product.ToList();
             return View();
         }
         [HttpGet]
         [Route("Orders")]
         public IActionResult Orders()
         {
-            List<Order> orders = _context.Orders
+            List<Order> orders = _context.orders
                                     .Include(order => order.User)
                                     .Include(ord => ord.Product)
                                     .OrderByDescending(o => o.CreatedAt)
                                     .ToList();
             ViewBag.orders = orders;
-            ViewBag.products = _context.Product.ToList();
-            ViewBag.customers = _context.User.ToList();
+            ViewBag.products = _context.product.ToList();
+            ViewBag.customers = _context.user.ToList();
             return View();
         }
         [HttpPost]
@@ -69,7 +69,7 @@ namespace ecommerce.Controllers
             }
             else
             {
-                ViewBag.products = _context.Product.ToList();
+                ViewBag.products = _context.product.ToList();
                 return View("Products");
             }
         }
@@ -91,28 +91,28 @@ namespace ecommerce.Controllers
                 }
                 else
                 {
-                    List<Order> orders = _context.Orders
+                    List<Order> orders = _context.orders
                                     .Include(order => order.User)
                                     .Include(ord => ord.Product)
                                     .OrderByDescending(o => o.CreatedAt)
                                     .ToList();
                     ViewBag.orders = orders;
-                    ViewBag.products = _context.Product.ToList();
-                    ViewBag.customers = _context.User.ToList();
+                    ViewBag.products = _context.product.ToList();
+                    ViewBag.customers = _context.user.ToList();
                     return View("Orders");
                 }
             }
             else
             {
-                List<Order> orders = _context.Orders
+                List<Order> orders = _context.orders
                                     .Include(order => order.User)
                                     .Include(ord => ord.Product)
                                     .OrderByDescending(o => o.CreatedAt)
                                     .ToList();
                 ViewBag.orders = orders;
                 ViewBag.error = "Not enough product quantity for that order";
-                ViewBag.products = _context.Product.ToList();
-                ViewBag.customers = _context.User.ToList();
+                ViewBag.products = _context.product.ToList();
+                ViewBag.customers = _context.user.ToList();
                 return View("Orders");
             }
         }

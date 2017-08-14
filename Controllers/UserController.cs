@@ -21,39 +21,39 @@ namespace ecommerce.Controllers
         [Route("Customers")]
         public IActionResult Customers()
         {
-            ViewBag.users = _context.User.ToList();
+            ViewBag.users = _context.user.ToList();
             return View();
         }
         [HttpPost]
         [Route("Add")]
         public IActionResult Add(User user){
             if(ModelState.IsValid){
-                var foundUser = _context.User.Where(u => u.Name == user.Name).ToList();
+                var foundUser = _context.user.Where(u => u.Name == user.Name).ToList();
                 if(foundUser.Count <0){
                     ViewBag.error ="Customer is already registered";
-                    ViewBag.users = _context.User.ToList();
+                    ViewBag.users = _context.user.ToList();
                     return View("Customers");
                 } else {
                     user.CreatedAt = DateTime.Now;
                     user.UpdatedAt = DateTime.Now;
                     _context.Add(user);
                     _context.SaveChanges();
-                    ViewBag.users = _context.User.ToList();
+                    ViewBag.users = _context.user.ToList();
                     return View("Customers");
                 }
             } else {
                 ViewBag.error = "Customer Name is required";
-                ViewBag.users = _context.User.ToList();
+                ViewBag.users = _context.user.ToList();
                 return View("Customers");
             }
         }
         [HttpGet]
         [Route("deleteUser/{UserId}")]
         public IActionResult DeleteUser(int UserId){
-            User user = _context.User.Where(u => u.UserId == UserId).FirstOrDefault();
-            _context.User.Remove(user);
+            User user = _context.user.Where(u => u.UserId == UserId).FirstOrDefault();
+            _context.user.Remove(user);
             _context.SaveChanges();
-            ViewBag.users = _context.User.ToList();
+            ViewBag.users = _context.user.ToList();
             return View("Customers");
         }      
     }
