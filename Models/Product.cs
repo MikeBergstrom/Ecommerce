@@ -5,16 +5,22 @@ using ecommerce.Models;
  
 namespace ecommerce.Models
 {
-    public class User : BaseEntity
+    public class Product : BaseEntity
     {
-        public int UserId {get; set;}
+        
+        public int ProductId {get; set;}
         [Required]
         public string Name {get; set;}
+        public string Image {get; set;}
+        [Required]
+        public string Description {get; set;}
+        [Required]
+        public int Quantity {get;set;}
         public DateTime CreatedAt {get;set;}
         public DateTime UpdatedAt {get; set;}
         public List<Order> Orders {get; set;}
 
-        public User(){
+        public Product(){
             Orders= new List<Order>();
         }
 

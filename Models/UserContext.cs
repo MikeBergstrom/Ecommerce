@@ -7,8 +7,8 @@ namespace ecommerce.Models
     {
         // base() calls the parent class' constructor passing the "options" parameter along
         public UserContext(DbContextOptions<UserContext> options) : base(options) { }
-	public DbSet<User> Users { get; set; }
-	public DbSet<Wedding> Weddings { get; set; }
-	public DbSet<Guest> Guest { get; set; }
+	public DbSet<User> User { get; set; }
+	public DbSet<Order> Orders { get; set; }
+	public DbSet<Product> Product { get; set; }
     }
 }

@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Products";
+}
+@model ecommerce.Models.Product
+<div class="row">
+    <div class="col-sm-8">
+        <p><a href="/">Dashboard</a>  |  Products  |  <a href="/Orders">Orders</a>  |  <a href="/Customers">Customers</a>  |  <a href="/Settings">Settings</a></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <h2>Add a New Product</h2>
+        <form asp-controller="Product" asp-action="AddProduct" method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input class="form-control" asp-for="Name">
+            </div>
+            <div class="form-group">
+                <label asp-for="Image"></label>
+                <input class="form-control" asp-for="Image">
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input class="form-control" asp-for="Description">
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity">Initial Quantity</label>
+                <input class="form-control" asp-for="Quantity">
+            </div>
+            <input class="form-control" type="submit" value="Create">
+            <div asp-validation-summary="All"></div>
+        </form>
+    </div>
+    <div class="col-sm-9">
+        @foreach(var product in @ViewBag.products){
+            <div class="col-sm-2">
+                <img src="@product.Image" width="75" height="75">
+                <p>@product.Name</p>
+                <p>(@product.Quantity Left)</p>
+            </div>
+        }
+    </div>
+</div>

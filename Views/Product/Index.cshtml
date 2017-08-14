@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<div class="row">
+    <div class="col-sm-8">
+        <p> Dashboard  |  <a href="/Products">Products</a>  |  <a href="/Orders">Orders</a>  |  <a href="/Customers">Customers</a>  |  <a href="/Settings">Settings</a></p>
+    </div>
+</div>
+<div class="row">
+    @foreach(var product in @ViewBag.products){
+            <div class="col-sm-2">
+                <img src="@product.Image" width="75" height="75">
+                <p>@product.Name</p>
+                <p>(@product.Quantity Left)</p>
+            </div>
+        }
+    <a href="Products">show more...</a>
+</div>
+<div class="row">
+    <h2>Recent Orders</h2>
+    @foreach(var order in @ViewBag.orders){
+        TimeSpan timeAgo = new TimeSpan();
+        timeAgo = DateTime.Now - @order.CreatedAt;
+        <p>@order.User.Name puchased @order.Quantity @order.Product.Name...(@timeAgo.ToString("dd") days, @timeAgo.ToString("hh") hours ago )</p>
+    }
+    <a href="/Orders">show all orders...</a>
+</div>
+<div class="row">
+    <h2>New Customers</h2>
+    @foreach(var customer in @ViewBag.customers){
+        TimeSpan timeAgo = new TimeSpan();
+        timeAgo = DateTime.Now - @customer.CreatedAt;
+        <p>@customer.Name joined the store. (@timeAgo ago)</p>
+    }
+    <a href="/Customers">show all customers...</a>
+</div>
